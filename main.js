@@ -9,6 +9,8 @@ const url = require('url')
 const fs = require('fs')
 const showdown = require('showdown')
 
+var shell = require("electron").shell
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -16,6 +18,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600, title: 'MD Reader'})
+
+  mainWindow.webContents.on('will-navigate', handleRedirect)
 
   var markdownFileName = 'README.md'
 
@@ -87,6 +91,13 @@ function reloadMarkdownFile(markdownFileName) {
       })
     })
   })
+}
+
+function handleRedirect (e, url) {
+  if(url != mainWindow.webContents.getURL()) {
+    e.preventDefault()
+    require('electron').shell.openExternal(url)
+  }
 }
 
 // In this file you can include the rest of your app's specific main process
