@@ -17,33 +17,13 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600, title: 'MD Reader'})
 
-  fs.readFile('README.md', 'utf8', function (err, markdown) {
-    if (err) throw err
+  var markdownFileName = 'README.md'
 
-    var converter = new showdown.Converter()
-    var html = converter.makeHtml(markdown);
-    html = '<div class="markdown-body">' + html + '</div>'
+  reloadMarkdownFile(markdownFileName)
 
-    fs.writeFile('test.html', html, function (err) {
-      if (err) throw err
-
-      mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'test.html'),
-        protocol: 'file:',
-        slashes: true
-      }))
-
-      var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
-
-      fs.readFile(path.join(__dirname, cssPath), 'utf8', function (err, css) {
-        if (err) throw err
-
-        mainWindow.webContents.on('did-finish-load', function() {
-          mainWindow.webContents.insertCSS(css)
-        });
-      })
-    })
-  })
+  fs.watchFile(markdownFileName, (curr, prev) => {
+    reloadMarkdownFile(markdownFileName)
+  });
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -78,6 +58,36 @@ app.on('activate', function () {
     createWindow()
   }
 })
+
+function reloadMarkdownFile(markdownFileName) {
+  fs.readFile(markdownFileName, 'utf8', function (err, markdown) {
+    if (err) throw err
+
+    var converter = new showdown.Converter()
+    var html = converter.makeHtml(markdown);
+    html = '<div class="markdown-body">' + html + '</div>'
+
+    fs.writeFile('test.html', html, function (err) {
+      if (err) throw err
+
+      mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'test.html'),
+        protocol: 'file:',
+        slashes: true
+      }))
+
+      var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
+
+      fs.readFile(path.join(__dirname, cssPath), 'utf8', function (err, css) {
+        if (err) throw err
+
+        mainWindow.webContents.on('did-finish-load', function() {
+          mainWindow.webContents.insertCSS(css)
+        });
+      })
+    })
+  })
+}
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
