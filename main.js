@@ -25,7 +25,7 @@ function createWindow () {
 
   reloadMarkdownFile(markdownFileName)
 
-  fs.watchFile(markdownFileName, (curr, prev) => {
+  fs.watch(markdownFileName, function () {
     reloadMarkdownFile(markdownFileName)
   });
 
