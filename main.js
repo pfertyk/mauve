@@ -8,6 +8,7 @@ const path = require('path')
 const url = require('url')
 const fs = require('fs')
 const showdown = require('showdown')
+const temp = require('temp')
 
 var shell = require("electron").shell
 
@@ -71,11 +72,13 @@ function reloadMarkdownFile(markdownFileName) {
     var html = converter.makeHtml(markdown);
     html = '<div class="markdown-body">' + html + '</div>'
 
-    fs.writeFile('test.html', html, function (err) {
+    const tempHtmlPath = temp.path({suffix: '.html'})
+
+    fs.writeFile(tempHtmlPath, html, function (err) {
       if (err) throw err
 
       mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'test.html'),
+        pathname: tempHtmlPath,
         protocol: 'file:',
         slashes: true
       }))
