@@ -9,8 +9,7 @@ const url = require('url')
 const fs = require('fs')
 const showdown = require('showdown')
 const temp = require('temp')
-
-var shell = require("electron").shell
+const shell = require("electron").shell
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -99,7 +98,7 @@ function reloadMarkdownFile(markdownFileName) {
 function handleRedirect (e, url) {
   if(url != mainWindow.webContents.getURL()) {
     e.preventDefault()
-    require('electron').shell.openExternal(url)
+    shell.openExternal(url)
   }
 }
 
