@@ -11,7 +11,7 @@ const BrowserWindow = electron.BrowserWindow
 let mainWindow
 
 function createWindow () {
-  var markdownFileName = 'README.md'
+  var markdownFileName = process.argv[2] || 'README.md'
 
   mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
 
