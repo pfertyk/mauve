@@ -11,11 +11,9 @@ const BrowserWindow = electron.BrowserWindow
 let mainWindow
 
 function createWindow () {
-  mainWindow = new BrowserWindow({title: 'MD Reader'})
-
-  mainWindow.webContents.on('will-navigate', handleRedirect)
-
   var markdownFileName = 'README.md'
+
+  mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
 
   reloadMarkdownFile(markdownFileName)
 
@@ -23,6 +21,7 @@ function createWindow () {
     reloadMarkdownFile(markdownFileName)
   });
 
+  mainWindow.webContents.on('will-navigate', handleRedirect)
   mainWindow.on('closed', function () {
     mainWindow = null
   })
