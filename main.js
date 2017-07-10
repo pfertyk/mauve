@@ -74,8 +74,12 @@ function reloadMarkdownFile(markdownFileName) {
 }
 
 function handleRedirect (e, url) {
-  if(url != mainWindow.webContents.getURL()) {
-    e.preventDefault()
+  e.preventDefault()
+  if (/^file:\/\//.test(url)) {
+    url = url.replace(/^file:\/\//, '')
+    reloadMarkdownFile(url)
+  }
+  else if(url != mainWindow.webContents.getURL()) {
     shell.openExternal(url)
   }
 }
