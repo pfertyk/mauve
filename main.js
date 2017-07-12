@@ -4,7 +4,7 @@ const url = require('url')
 const fs = require('fs')
 const showdown = require('showdown')
 const temp = require('temp')
-const shell = require("electron").shell
+const shell = require('electron').shell
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -19,7 +19,7 @@ function createWindow () {
 
   fs.watch(markdownFileName, function () {
     reloadMarkdownFile(markdownFileName)
-  });
+  })
 
   mainWindow.webContents.on('will-navigate', handleRedirect)
   mainWindow.on('closed', function () {
@@ -46,7 +46,7 @@ function reloadMarkdownFile(markdownFileName) {
     if (err) throw err
 
     var converter = new showdown.Converter()
-    var html = converter.makeHtml(markdown);
+    var html = converter.makeHtml(markdown)
     html = '<div class="markdown-body">' + html + '</div>'
 
     const tempHtmlPath = temp.path({suffix: '.html'})
@@ -67,7 +67,7 @@ function reloadMarkdownFile(markdownFileName) {
 
         mainWindow.webContents.on('did-finish-load', function() {
           mainWindow.webContents.insertCSS(css)
-        });
+        })
       })
     })
   })
