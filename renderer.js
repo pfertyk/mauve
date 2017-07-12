@@ -1,3 +1,37 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+const path = require('path')
+const url = require('url')
+const fs = require('fs')
+const showdown = require('showdown')
+const temp = require('temp')
+
+exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
+  fs.readFile(markdownFileName, 'utf8', function (err, markdown) {
+    if (err) throw err
+
+    var converter = new showdown.Converter()
+    var html = converter.makeHtml(markdown)
+    html = '<div class="markdown-body">' + html + '</div>'
+
+    const tempHtmlPath = temp.path({suffix: '.html'})
+
+    fs.writeFile(tempHtmlPath, html, function (err) {
+      if (err) throw err
+
+      mainWindow.loadURL(url.format({
+        pathname: tempHtmlPath,
+        protocol: 'file:',
+        slashes: true
+      }))
+
+      var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
+
+      fs.readFile(path.join(__dirname, cssPath), 'utf8', function (err, css) {
+        if (err) throw err
+
+        mainWindow.webContents.on('did-finish-load', function() {
+          mainWindow.webContents.insertCSS(css)
+        })
+      })
+    })
+  })
+}
