@@ -1,7 +1,7 @@
 const electron = require('electron')
 const fs = require('fs')
-const shell = require('electron').shell
 const renderer = require('./renderer')
+const shell = require('electron').shell
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow

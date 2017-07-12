@@ -1,8 +1,8 @@
-const path = require('path')
-const url = require('url')
 const fs = require('fs')
+const path = require('path')
 const showdown = require('showdown')
 const temp = require('temp')
+const url = require('url')
 
 exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
   fs.readFile(markdownFileName, 'utf8', function (err, markdown) {
