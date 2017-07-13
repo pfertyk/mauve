@@ -1,5 +1,6 @@
 const electron = require('electron')
 const fs = require('fs')
+const path = require('path')
 const renderer = require('./renderer')
 const shell = require('electron').shell
 
@@ -11,6 +12,16 @@ function createWindow () {
   var markdownFileName = process.argv[2] || 'README.md'
 
   mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
+
+  var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
+
+  fs.readFile(path.join(__dirname, cssPath), 'utf8', function (err, css) {
+    if (err) throw err
+
+    mainWindow.webContents.on('did-finish-load', function() {
+      mainWindow.webContents.insertCSS(css)
+    })
+  })
 
   renderer.reloadMarkdownFile(mainWindow, markdownFileName)
 

@@ -1,5 +1,4 @@
 const fs = require('fs')
-const path = require('path')
 const showdown = require('showdown')
 
 exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
@@ -12,15 +11,5 @@ exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
     html = 'data:text/html;charset=UTF-8,' + html
 
     mainWindow.loadURL(html)
-
-    var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
-
-    fs.readFile(path.join(__dirname, cssPath), 'utf8', function (err, css) {
-      if (err) throw err
-
-      mainWindow.webContents.on('did-finish-load', function() {
-        mainWindow.webContents.insertCSS(css)
-      })
-    })
   })
 }
