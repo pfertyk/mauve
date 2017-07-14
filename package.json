@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "github-markdown-css": "^2.8.0",
-    "showdown": "^1.7.1",
-    "temp": "^0.8.3"
+    "showdown": "^1.7.1"
   }
 }
