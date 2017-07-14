@@ -1,7 +1,7 @@
 const fs = require('fs')
 const showdown = require('showdown')
 
-exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
+exports.reloadMarkdownFile = function (markdownFileName, loadContentCallback) {
   fs.readFile(markdownFileName, 'utf8', function (err, markdown) {
     if (err) throw err
 
@@ -10,6 +10,6 @@ exports.reloadMarkdownFile = function (mainWindow, markdownFileName) {
     html = '<div class="markdown-body">' + html + '</div>'
     html = 'data:text/html;charset=UTF-8,' + html
 
-    mainWindow.loadURL(html)
+    loadContentCallback(html)
   })
 }
