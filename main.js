@@ -8,7 +8,7 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 let mainWindow
 
-const reloadWindow = (url) => {
+const reloadWindow = url => {
   mainWindow.loadURL(url)
 }
 
