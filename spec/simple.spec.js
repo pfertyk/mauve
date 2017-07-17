@@ -15,6 +15,6 @@ describe ('Renderer', () => {
       expect(loadContentCallback.calls.count()).toEqual(1)
       expect(loadContentCallback.calls.mostRecent().args[0]).toMatch(expectedMarkdown)
       done()
-    })
+    }, done.fail)
   })
 })
