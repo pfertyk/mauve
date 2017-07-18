@@ -17,7 +17,7 @@ const reloadWindow = url => {
 const renderer = new MarkdownRenderer(reloadWindow)
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
+  mainWindow = new BrowserWindow({title: 'Mauve', autoHideMenuBar: true})
 
   var cssPath = '../node_modules/github-markdown-css/github-markdown.css'
 
