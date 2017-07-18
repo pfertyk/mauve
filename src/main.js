@@ -1,18 +1,23 @@
 const electron = require('electron')
 const fs = require('fs')
 const path = require('path')
-const renderer = require('./renderer')
 const shell = require('electron').shell
+
+const MarkdownRenderer = require('./renderer').MarkdownRenderer
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+
 let mainWindow
 
 const reloadWindow = url => {
   mainWindow.loadURL(url)
 }
 
+const renderer = new MarkdownRenderer(reloadWindow)
+
 const createWindow = () => {
+
   var markdownFileName = process.argv[2] || 'README.md'
 
   mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
@@ -27,10 +32,10 @@ const createWindow = () => {
     })
   })
 
-  renderer.reloadMarkdownFile(markdownFileName, reloadWindow)
+  renderer.loadFile(markdownFileName)
 
   fs.watch(markdownFileName, () => {
-    renderer.reloadMarkdownFile(markdownFileName, reloadWindow)
+    renderer.loadFile(markdownFileName)
   })
 
   mainWindow.webContents.on('will-navigate', handleRedirect)
@@ -57,7 +62,7 @@ const handleRedirect = (e, url) => {
   e.preventDefault()
   if (/^file:\/\//.test(url)) {
     url = url.replace(/^file:\/\//, '')
-    renderer.reloadMarkdownFile(url, reloadWindow)
+    renderer.loadFile(url)
   }
   else if(url != mainWindow.webContents.getURL()) {
     shell.openExternal(url)
