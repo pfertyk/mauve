@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
-    "github-markdown-css": "^2.8.0",
     "showdown": "^1.7.1"
   }
 }

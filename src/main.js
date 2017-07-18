@@ -19,15 +19,9 @@ const renderer = new MarkdownRenderer(reloadWindow)
 const createWindow = () => {
   mainWindow = new BrowserWindow({title: 'Mauve', autoHideMenuBar: true})
 
-  var cssPath = '../node_modules/github-markdown-css/github-markdown.css'
-
-  fs.readFile(path.join(__dirname, cssPath), 'utf8', (err, css) => {
-    if (err) throw err
-
-    mainWindow.webContents.on('did-finish-load', () => {
-      mainWindow.webContents.insertCSS(css)
-    })
-  })
+  mainWindow.on('closed', () => { mainWindow = null })
+  mainWindow.webContents.on('will-navigate', handleRedirect)
+  mainWindow.webContents.on('did-finish-load', loadCSS)
 
   var markdownFileName = process.argv[2]
   if (markdownFileName) {
@@ -38,11 +32,13 @@ const createWindow = () => {
   } else {
     renderer.load('# Welcome in Mauve!\n\nDrag files here to view them')
   }
+}
 
+const loadCSS = () => {
+  fs.readFile(path.join(__dirname, 'github.css'), 'utf8', (err, css) => {
+    if (err) throw err
 
-  mainWindow.webContents.on('will-navigate', handleRedirect)
-  mainWindow.on('closed', () => {
-    mainWindow = null
+    mainWindow.webContents.insertCSS(css)
   })
 }
 
