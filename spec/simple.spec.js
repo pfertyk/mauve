@@ -1,4 +1,4 @@
-const renderer = require('../renderer')
+const renderer = require('../src/renderer')
 
 describe ('Renderer', () => {
   var loadContentCallback
