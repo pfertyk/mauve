@@ -17,7 +17,7 @@ const createWindow = () => {
 
   mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
 
-  var cssPath = 'node_modules/github-markdown-css/github-markdown.css'
+  var cssPath = '../node_modules/github-markdown-css/github-markdown.css'
 
   fs.readFile(path.join(__dirname, cssPath), 'utf8', (err, css) => {
     if (err) throw err
