@@ -1,21 +1,17 @@
 {
-  "name": "electron-quick-start",
+  "name": "Mauve",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Very simple Markdown viewer",
   "main": "./src/main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "markdown",
+    "viewer"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Paweł Fertyk",
+  "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2"
   },
