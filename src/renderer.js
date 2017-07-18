@@ -26,7 +26,7 @@ class MarkdownRenderer {
     return Promise.promisify((markdown, callback) => {
       var html = this.converter.makeHtml(markdown)
       html = '<div class="markdown-body">' + html + '</div>'
-      html = 'data:text/html;charset=UTF-8,' + html
+      html = 'data:text/html;charset=UTF-8,' + encodeURIComponent(html)
       callback(null, html)
     })(markdown)
   }
