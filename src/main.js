@@ -46,6 +46,17 @@ const createWindow = () => {
   })
 }
 
+const handleRedirect = (e, url) => {
+  e.preventDefault()
+  if (/^file:\/\//.test(url)) {
+    url = url.replace(/^file:\/\//, '')
+    renderer.loadFile(url)
+  }
+  else if(url != mainWindow.webContents.getURL()) {
+    shell.openExternal(url)
+  }
+}
+
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
@@ -59,14 +70,3 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
-const handleRedirect = (e, url) => {
-  e.preventDefault()
-  if (/^file:\/\//.test(url)) {
-    url = url.replace(/^file:\/\//, '')
-    renderer.loadFile(url)
-  }
-  else if(url != mainWindow.webContents.getURL()) {
-    shell.openExternal(url)
-  }
-}
