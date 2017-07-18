@@ -17,9 +17,6 @@ const reloadWindow = url => {
 const renderer = new MarkdownRenderer(reloadWindow)
 
 const createWindow = () => {
-
-  var markdownFileName = process.argv[2] || 'README.md'
-
   mainWindow = new BrowserWindow({title: 'MD Reader', autoHideMenuBar: true})
 
   var cssPath = '../node_modules/github-markdown-css/github-markdown.css'
@@ -32,11 +29,16 @@ const createWindow = () => {
     })
   })
 
-  renderer.loadFile(markdownFileName)
-
-  fs.watch(markdownFileName, () => {
+  var markdownFileName = process.argv[2]
+  if (markdownFileName) {
     renderer.loadFile(markdownFileName)
-  })
+    fs.watch(markdownFileName, () => {
+      renderer.loadFile(markdownFileName)
+    })
+  } else {
+    renderer.load('# Welcome in Mauve!\n\nDrag files here to view them')
+  }
+
 
   mainWindow.webContents.on('will-navigate', handleRedirect)
   mainWindow.on('closed', () => {
