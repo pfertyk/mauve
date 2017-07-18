@@ -19,4 +19,15 @@ describe ('Renderer', () => {
       done()
     }, done.fail)
   })
+
+  it('converts a markdown string', (done) => {
+    var markdown = '## Hi'
+    const expectedMarkdown = '^[^<>]*<div class="markdown-body"><h2 id="hi">Hi</h2></div>$'
+
+    renderer.load(markdown, callback).then(() => {
+      expect(callback.calls.count()).toEqual(1)
+      expect(callback.calls.mostRecent().args[0]).toMatch(expectedMarkdown)
+      done()
+    }, done.fail)
+  })
 })
