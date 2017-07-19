@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const shell = require('electron').shell
 
-const MarkdownRenderer = require('./renderer').MarkdownRenderer
+const { MarkdownRenderer } = require('./renderer')
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow

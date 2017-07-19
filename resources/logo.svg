@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <svg baseProfile="full" height="100%" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><style type="text/css"><![CDATA[
+.filler { fill:none }
 .hex-background { fill:#e0b0ff }
 .hex-frame { fill:none;stroke:#8846b2;stroke-width:80 }
 .hex-front { fill:#62228c }
 ]]></style>
-<g transform="translate(40 46)">
+<rect class="filler" width="1100" height="1100" />
+<g transform="translate(117 50)">
 <polygon class="hex-background" points="433,1000 866,750 866,250 433,0 0,250 0,750" />
 <polygon class="hex-front" points="433,500 866,250 433,0 0,250" />
 <polygon class="hex-front" points="433,1000 665,866 665,567 433,701 201,567 201,866" />
