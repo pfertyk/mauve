@@ -11,7 +11,7 @@ describe ('Renderer', () => {
   })
 
   it('converts a markdown file', (done) => {
-    const markdownFilePath = path.join(__dirname, 'md/header.md')
+    const markdownFilePath = path.join(__dirname, 'md', 'header.md')
 
     renderer.loadFile(markdownFilePath).then(() => {
       expect(callback).toHaveBeenCalledWith(
@@ -33,7 +33,7 @@ describe ('Renderer', () => {
   })
 
   it('preserves new lines in code', (done) => {
-    const markdownFilePath = path.join(__dirname, 'md/code.md')
+    const markdownFilePath = path.join(__dirname, 'md', 'code.md')
 
     renderer.loadFile(markdownFilePath).then(() => {
       expect(callback).toHaveBeenCalledWith(
