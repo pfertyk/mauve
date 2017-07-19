@@ -10,7 +10,8 @@ const BrowserWindow = electron.BrowserWindow
 
 let mainWindow
 
-const reloadWindow = url => {
+const reloadWindow = html => {
+  var url = 'data:text/html;charset=UTF-8,' + encodeURIComponent(html)
   mainWindow.loadURL(url)
 }
 
