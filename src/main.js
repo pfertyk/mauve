@@ -18,7 +18,10 @@ const reloadWindow = html => {
 const renderer = new MarkdownRenderer(reloadWindow)
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({title: 'Mauve', autoHideMenuBar: true})
+  mainWindow = new BrowserWindow({
+    icon: path.join(__dirname, '..', 'resources', 'logo64.png'),
+    title: 'Mauve', autoHideMenuBar: true
+  })
 
   mainWindow.on('closed', () => { mainWindow = null })
   mainWindow.webContents.on('will-navigate', handleRedirect)
