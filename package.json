@@ -1,6 +1,6 @@
 {
-  "name": "Mauve",
-  "version": "1.0.0",
+  "name": "maeve",
+  "version": "0.1.0",
   "description": "Very simple Markdown viewer",
   "main": "./src/main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "markdown",
     "viewer"
   ],
-  "author": "Paweł Fertyk",
+  "author": "Paweł Fertyk <pfertyk@pfertyk.me>",
   "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2"
