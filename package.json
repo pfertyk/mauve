@@ -1,5 +1,6 @@
 {
   "name": "mauve-markdown",
+  "productName": "Mauve",
   "version": "0.1.0",
   "description": "Very simple Markdown viewer",
   "main": "./src/main.js",
