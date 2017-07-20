@@ -27,7 +27,7 @@ const createWindow = () => {
   mainWindow.webContents.on('will-navigate', handleRedirect)
   mainWindow.webContents.on('did-finish-load', loadCSS)
 
-  var markdownFileName = process.argv[2]
+  var markdownFileName = process.argv[process.defaultApp ? 2 : 1]
   if (markdownFileName) {
     renderer.loadFile(markdownFileName)
     fs.watch(markdownFileName, () => {
