@@ -1,0 +1,10 @@
+{
+  "src": "release/mauve-markdown-linux-x64",
+  "dest": "release/installers/",
+  "arch": "amd64",
+  "productName": "Mauve",
+  "icon": "resources/icon.svg",
+  "categories": [
+    "Utility"
+  ]
+}

@@ -1,11 +1,12 @@
 {
   "name": "mauve-markdown",
-  "productName": "Mauve",
   "version": "0.1.0",
   "description": "Very simple Markdown viewer",
   "main": "./src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . --overwrite --all --icon=resources/logo.svg --prune=true --out=release --ignore=build",
+    "deb64": "electron-installer-debian --config build/deb.config.json"
   },
   "keywords": [
     "markdown",
