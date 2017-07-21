@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . --overwrite --all --icon=resources/logo.svg --prune=true --out=release --ignore=build",
-    "deb64": "electron-installer-debian --config build/deb.config.json"
+    "deb64": "electron-installer-debian --arch=amd64 --config build/linux_x64.json",
+    "rpm64": "electron-installer-redhat --arch=x86_64 --config build/linux_x64.json"
   },
   "keywords": [
     "markdown",
