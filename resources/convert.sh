@@ -3,7 +3,7 @@
 orig_file=$1
 filename="${orig_file%.*}"
 
-resolutions=(16 20 24 32 40 48 64 128 256)
+resolutions=(16 20 24 32 40 48 64 128 256 512)
 
 for res in "${resolutions[@]}"
 do

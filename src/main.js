@@ -19,7 +19,7 @@ const renderer = new MarkdownRenderer(reloadWindow)
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, '..', 'resources', 'logo64.png'),
+    icon: path.join(__dirname, '..', 'resources', 'icon.png'),
     title: 'Mauve', autoHideMenuBar: true
   })
 
