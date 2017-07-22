@@ -14,6 +14,8 @@ npm install
 npm start
 ```
 
+Binaries for Linux are available [here](https://github.com/pfertyk/mauve/releases).
+
 ## Features
 
 Mauve implements a minimal set of features, including:
