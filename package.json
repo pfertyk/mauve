@@ -6,8 +6,9 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . --overwrite --all --icon=resources/logo.svg --prune=true --out=release --ignore=build",
-    "deb64": "electron-installer-debian --arch=amd64 --config build/linux_x64.json",
-    "rpm64": "electron-installer-redhat --arch=x86_64 --config build/linux_x64.json"
+    "deb64": "electron-installer-debian --arch=amd64 --config build/linux-x64.json",
+    "rpm64": "electron-installer-redhat --arch=x86_64 --config build/linux-x64.json",
+    "app64": "electron-installer-zip release/mauve-markdown-darwin-x64/mauve-markdown.app release/installers/mauve-markdown.zip"
   },
   "keywords": [
     "markdown",
