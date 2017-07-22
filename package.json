@@ -15,6 +15,10 @@
     "viewer"
   ],
   "author": "Paweł Fertyk <pfertyk@pfertyk.me>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pfertyk/mauve.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2"
