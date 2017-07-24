@@ -1,5 +1,5 @@
 const path = require('path')
-const { MarkdownRenderer } = require('../src/renderer')
+const MarkdownRenderer = require('../src/renderer').MarkdownRenderer
 
 describe ('Renderer', () => {
   var renderer
