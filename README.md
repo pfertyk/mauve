@@ -1,6 +1,6 @@
-# Mauve
-
-A very simple Markdown viewer.
+<div align="center"><img src="https://raw.githubusercontent.com/pfertyk/mauve/master/resources/icon.png" alt="Mauve" width="200"></div>
+<h1 align="center">Mauve</h1>
+<h3 align="center">A very simple Markdown viewer</h3>
 
 ## Installation
 
