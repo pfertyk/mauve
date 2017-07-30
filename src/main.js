@@ -30,9 +30,6 @@ const createWindow = () => {
   var markdownFileName = process.argv[process.defaultApp ? 2 : 1]
   if (markdownFileName) {
     renderer.loadFile(markdownFileName)
-    fs.watch(markdownFileName, () => {
-      renderer.loadFile(markdownFileName)
-    })
   } else {
     renderer.load('# Welcome in Mauve!\n\nDrag files here to view them')
   }

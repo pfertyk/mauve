@@ -1,4 +1,3 @@
-const { promisify } = require('util')
 const fs = require('fs')
 const showdown = require('showdown')
 
@@ -30,11 +29,11 @@ class MarkdownRenderer {
   }
 
   convert (markdown) {
-    return promisify((markdown, callback) => {
+    return new Promise((resolve) => {
       var html = this.converter.makeHtml(markdown)
       html = '<div class="markdown-body">' + html + '</div>'
-      callback(null, html)
-    })(markdown)
+      resolve(html)
+    })
   }
 }
 
