@@ -8,10 +8,10 @@ module.exports = {
       watchers[file]('change', file)
     }
   },
-  watch (filename, listener) {
-    watchers[filename] = listener
+  watch (file, listener) {
+    watchers[file] = listener
   },
-  readFile (filename, encoding, callback) {
-    callback(null, files[filename])
+  readFileSync (file) {
+    return files[file]
   }
 }
