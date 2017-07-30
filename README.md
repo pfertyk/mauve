@@ -1,6 +1,11 @@
-# Mauve
-
-A very simple Markdown viewer.
+<div align="center"><img src="https://raw.githubusercontent.com/pfertyk/mauve/master/resources/icon.png" alt="Mauve" width="200"></div>
+<h1 align="center">Mauve</h1>
+<h3 align="center">A very simple Markdown viewer</h3>
+<div align="center">
+<a href="https://travis-ci.org/pfertyk/mauve">
+<img alt="Build Status" src="https://travis-ci.org/pfertyk/mauve.svg?branch=master" />
+</a>
+</div>
 
 ## Installation
 
