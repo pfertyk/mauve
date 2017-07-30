@@ -61,4 +61,23 @@ describe ('Renderer', () => {
         done()
       }, done.fail)
   })
+
+  it('ignores old file when new is loaded', (done) => {
+    const path_old = 'file_old.md'
+    const path_new = 'file_new.md'
+    mockfs.writeFileSync(path_old, 'original')
+    mockfs.writeFileSync(path_new, 'anything')
+
+    renderer.loadFile(path_old)
+      .then(renderer.loadFile(path_new))
+      .then(() => {
+        mockfs.writeFileSync(path_old, 'changed')
+      })
+      .then(() => {
+        expect(callback).not.toHaveBeenCalledWith(
+          '<div class="markdown-body"><p>changed</p></div>'
+        )
+        done()
+      }, done.fail)
+  })
 })
