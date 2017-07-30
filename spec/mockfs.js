@@ -10,6 +10,7 @@ module.exports = {
   },
   watch (file, listener) {
     watchers[file] = listener
+    return { close: () => { delete watchers[file] } }
   },
   readFileSync (file) {
     return files[file]
