@@ -55,7 +55,7 @@ describe ('Renderer', () => {
         mockfs.writeFileSync('file.md', 'changed')
       })
       .then(() => {
-        expect(callback).toHaveBeenCalledWith(
+        expect(callback.calls.mostRecent().args[0]).toEqual(
           '<div class="markdown-body"><p>changed</p></div>'
         )
         done()
