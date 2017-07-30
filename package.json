@@ -26,7 +26,6 @@
     "proxyquire": "^1.8.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
     "showdown": "^1.7.1"
   }
 }
