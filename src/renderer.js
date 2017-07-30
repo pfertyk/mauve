@@ -9,7 +9,10 @@ class MarkdownRenderer {
   }
 
   loadFile (fileName) {
-    fs.watch(fileName, () => {
+    if (this.watcher) {
+      this.watcher.close()
+    }
+    this.watcher = fs.watch(fileName, () => {
       const markdown = fs.readFileSync(fileName, 'utf8')
       Promise.resolve(this.load(markdown))
     })
