@@ -21,7 +21,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.6.2",
+    "proxyquire": "^1.8.0"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
