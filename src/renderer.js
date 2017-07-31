@@ -1,5 +1,4 @@
-const Promise = require('bluebird')
-const readFile = Promise.promisify(require('fs').readFile)
+const fs = require('fs')
 const showdown = require('showdown')
 
 class MarkdownRenderer {
@@ -9,9 +8,16 @@ class MarkdownRenderer {
   }
 
   loadFile (fileName) {
-    return readFile(fileName, 'utf8').then((markdown) => {
-      return this.load(markdown)
+    if (this.watcher) {
+      this.watcher.close()
+    }
+    this.watcher = fs.watch(fileName, () => {
+      const markdown = fs.readFileSync(fileName, 'utf8')
+      Promise.resolve(this.load(markdown))
     })
+
+    const markdown = fs.readFileSync(fileName, 'utf8')
+    return this.load(markdown)
   }
 
   load (markdown) {
@@ -23,11 +29,11 @@ class MarkdownRenderer {
   }
 
   convert (markdown) {
-    return Promise.promisify((markdown, callback) => {
+    return new Promise((resolve) => {
       var html = this.converter.makeHtml(markdown)
       html = '<div class="markdown-body">' + html + '</div>'
-      callback(null, html)
-    })(markdown)
+      resolve(html)
+    })
   }
 }
 

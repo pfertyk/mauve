@@ -22,10 +22,10 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2",
-    "jasmine": "^2.6.0"
+    "jasmine": "^2.6.0",
+    "proxyquire": "^1.8.0"
   },
   "dependencies": {
-    "bluebird": "^3.5.0",
     "showdown": "^1.7.1"
   }
 }

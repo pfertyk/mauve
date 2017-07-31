@@ -1,5 +1,6 @@
-const path = require('path')
-const { MarkdownRenderer } = require('../src/renderer')
+const proxyquire = require('proxyquire')
+const mockfs = require('./mockfs')
+const { MarkdownRenderer } = proxyquire('../src/renderer', { 'fs': mockfs })
 
 describe ('Renderer', () => {
   var renderer
@@ -11,9 +12,10 @@ describe ('Renderer', () => {
   })
 
   it('converts a markdown file', (done) => {
-    const markdownFilePath = path.join(__dirname, 'md', 'header.md')
+    const path = 'header.md'
+    mockfs.writeFileSync(path, '# Hello')
 
-    renderer.loadFile(markdownFilePath).then(() => {
+    renderer.loadFile(path).then(() => {
       expect(callback).toHaveBeenCalledWith(
         '<div class="markdown-body"><h1 id="hello">Hello</h1></div>'
       )
@@ -33,13 +35,49 @@ describe ('Renderer', () => {
   })
 
   it('preserves new lines in code', (done) => {
-    const markdownFilePath = path.join(__dirname, 'md', 'code.md')
+    const path = 'code.md'
+    mockfs.writeFileSync(path, '```\nvar x = 3\nvar y = null\n```')
 
-    renderer.loadFile(markdownFilePath).then(() => {
+    renderer.loadFile(path).then(() => {
       expect(callback).toHaveBeenCalledWith(
         '<div class="markdown-body"><pre><code>var x = 3\nvar y = null\n</code></pre></div>'
       )
       done()
     }, done.fail)
+  })
+
+  it('watches loaded file', (done) => {
+    const path = 'file.md'
+    mockfs.writeFileSync(path, 'original')
+
+    renderer.loadFile(path)
+      .then(() => {
+        mockfs.writeFileSync('file.md', 'changed')
+      })
+      .then(() => {
+        expect(callback.calls.mostRecent().args[0]).toEqual(
+          '<div class="markdown-body"><p>changed</p></div>'
+        )
+        done()
+      }, done.fail)
+  })
+
+  it('ignores old file when new is loaded', (done) => {
+    const path_old = 'file_old.md'
+    const path_new = 'file_new.md'
+    mockfs.writeFileSync(path_old, 'original')
+    mockfs.writeFileSync(path_new, 'anything')
+
+    renderer.loadFile(path_old)
+      .then(renderer.loadFile(path_new))
+      .then(() => {
+        mockfs.writeFileSync(path_old, 'changed')
+      })
+      .then(() => {
+        expect(callback).not.toHaveBeenCalledWith(
+          '<div class="markdown-body"><p>changed</p></div>'
+        )
+        done()
+      }, done.fail)
   })
 })
