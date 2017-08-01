@@ -33,6 +33,12 @@ const createWindow = () => {
   } else {
     renderer.load('# Welcome in Mauve!\n\nDrag files here to view them')
   }
+
+  electron.globalShortcut.register('CommandOrControl+q', () => {
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
 }
 
 const loadCSS = () => {
