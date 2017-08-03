@@ -51,11 +51,12 @@ const loadCSS = () => {
 
 const handleRedirect = (e, url) => {
   e.preventDefault()
-  if (/^file:\/\//.test(url)) {
+  if (/^file:\/\//.test(url)) { // drag and drop
+    mainWindow.setTitle(url.split('/').pop())
     url = url.replace(/^file:\/\//, '')
     renderer.loadFile(url)
   }
-  else if(url != mainWindow.webContents.getURL()) {
+  else if(url != mainWindow.webContents.getURL()) { // external link
     shell.openExternal(url)
   }
 }
