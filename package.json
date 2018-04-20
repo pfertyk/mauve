@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron": "~1.6.2",
+    "electron": "^1.8.2",
     "electron-installer-debian": "^0.5.2",
     "electron-installer-redhat": "^0.5.0",
     "electron-packager": "^8.7.2",
